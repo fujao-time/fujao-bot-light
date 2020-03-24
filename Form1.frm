@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}#1.1#0"; "ieframe.dll"
 Begin VB.Form Form1 
-   Caption         =   "Fujao-Bot Light [1.000]"
-   ClientHeight    =   6735
+   Caption         =   "Fujao-Bot Light Model [1.001]"
+   ClientHeight    =   6615
    ClientLeft      =   540
    ClientTop       =   720
    ClientWidth     =   9375
@@ -18,15 +18,33 @@ Begin VB.Form Form1
    Icon            =   "Form1.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   6735
+   ScaleHeight     =   6615
    ScaleWidth      =   9375
    Begin VB.CommandButton Command2 
-      Caption         =   "Status: OFF"
-      Height          =   615
-      Left            =   4800
-      TabIndex        =   7
+      Caption         =   "Refresh"
+      Height          =   495
+      Left            =   2640
+      TabIndex        =   9
       Top             =   6000
-      Width           =   4455
+      Width           =   2415
+   End
+   Begin VB.CheckBox Check1 
+      Caption         =   "Use Control + Enter"
+      Height          =   315
+      Index           =   1
+      Left            =   6600
+      TabIndex        =   8
+      Top             =   6120
+      Width           =   2655
+   End
+   Begin VB.CheckBox Check1 
+      Caption         =   "Enabled"
+      Height          =   315
+      Index           =   0
+      Left            =   5160
+      TabIndex        =   7
+      Top             =   6120
+      Width           =   1335
    End
    Begin VB.Timer Timer6 
       Enabled         =   0   'False
@@ -41,11 +59,11 @@ Begin VB.Form Form1
    End
    Begin VB.CommandButton Command1 
       Caption         =   "Gacha!"
-      Height          =   615
+      Height          =   495
       Left            =   120
       TabIndex        =   6
       Top             =   6000
-      Width           =   4455
+      Width           =   2415
    End
    Begin VB.TextBox Text5 
       Height          =   405
@@ -164,13 +182,7 @@ MsgBox Text1.Text
 End Sub
 
 Private Sub Command2_Click()
-If pwr Then
-pwr = False
-Command2.Caption = "Status: OFF"
-Else
-pwr = True
-Command2.Caption = "Status: ON"
-End If
+Timer2.Enabled = True
 End Sub
 
 Private Sub Form_Load()
@@ -202,7 +214,7 @@ End Sub
 
 Private Sub Timer3_Timer() 'check time
 Text3.Text = Minute(Now)
-If pwr Then
+If Check1(0).Value = 1 Then
 If Val(Text3.Text) Mod 30 = 0 And ready Then
 Timer6.Enabled = True
 ready = False
@@ -226,10 +238,14 @@ End Sub
 
 Private Sub Timer6_Timer() 'send message
 Clipboard.Clear
-Clipboard.SetText Text1.Text
-the_void = SetCursorPos(Val(Text4.Text), Val(Text5.Text))
-mouse_event MOUSEEVENTF_LEFTDOWN Or MOUSEEVENTF_LEFTUP, 0, 0, 0, 0
-SendKeys ("^V")
+Clipboard.SetText Text1.Text 'copy
+the_void = SetCursorPos(Val(Text4.Text), Val(Text5.Text)) 'move cursor
+mouse_event MOUSEEVENTF_LEFTDOWN Or MOUSEEVENTF_LEFTUP, 0, 0, 0, 0 'press left button
+SendKeys ("^V") 'paste
+If Check1(1).Value = 1 Then 'send
 SendKeys ("^{ENTER}")
+Else
+SendKeys ("{ENTER}")
+End If
 Timer6.Enabled = False
 End Sub
