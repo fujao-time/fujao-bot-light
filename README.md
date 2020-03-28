@@ -1,11 +1,14 @@
-# fujao-bot-light
+# Fujao-Bot Light Model 1.002
 Fujao-Bot 非插件独立版，只需配合 PC 端聊天软件即可使用。使用 VB6.0 制成。
+
+[投稿页面](https://fujao-time.qmqaq.top/) · [TG群](https://t.me/fujao_time)
 
 ### 使用说明书
 从 Release 区内下载 EXE 后在虚拟机运行，为了规避新版 Windows 10 系统下运行 VB6.0 程序的一些问题，建议使用 Windows XP/7 虚拟机运行此程序。（7以上可能需要提权）
 
-双击启动程序后会自动拉取数据库（10 分钟一次），需要手动刷新请重启程序。
+关于该程序界面各个控件的描述，请看下图
 
-启动目标聊天会话后，在程序第一排最右边两个输入框内输入聊天输入框的 X Y 坐标后将 Enable 打勾，程序即可在目标群中自动发送整点/半点报时消息。
+![](https://s1.ax1x.com/2020/03/28/GktgC6.png)
 
-程序默认使用 Enter 发送消息。若您的聊天软件使用 Control + Enter 组合键，请将 Use Control + Enter 打勾。
+### 已知问题
+- Win10 下可能无法将报时消息文本正确粘贴至目标编辑框
